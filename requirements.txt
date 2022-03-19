@@ -4,5 +4,7 @@ Flask==1.0
 requests==2.20.0
 click==7.0
 gunicorn==19.9.0
-lxml
-redis
+lxml~=4.8.0
+redis~=4.1.4
+
+pytesseract~=0.3.9

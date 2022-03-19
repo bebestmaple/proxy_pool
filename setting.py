@@ -30,14 +30,14 @@ VERSION = "2.4.0"
 # ############### server config ###############
 HOST = "0.0.0.0"
 
-PORT = 5010
+PORT = 8010
 
 # ############### database config ###################
 # db connection uri
 # example:
 #      Redis: redis://:password@ip:port/db
 #      Ssdb:  ssdb://:password@ip:port
-DB_CONN = 'redis://:pwd@127.0.0.1:6379/0'
+DB_CONN = 'redis://:123456@127.0.0.1:6379/0'
 
 # proxy table name
 TABLE_NAME = 'use_proxy'
