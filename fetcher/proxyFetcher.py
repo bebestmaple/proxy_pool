@@ -183,10 +183,10 @@ class ProxyFetcher(object):
             page += 1
 
     @staticmethod
-    def freeProxy10():
+    def freeProxy10(page_count=10):
         """ 89免费代理 """
         page = 1
-        while True:
+        while page < page_count:
             url = "https://www.89ip.cn/index_%d.html" % page
             r = WebRequest().get(url, timeout=3)
             proxies = re.findall(
@@ -196,8 +196,8 @@ class ProxyFetcher(object):
                 break
             for proxy in proxies:
                 yield ':'.join(proxy)
-        sleep(1)
-        page += 1
+            sleep(1)
+            page += 1
 
     # @staticmethod
     # def wallProxy01():

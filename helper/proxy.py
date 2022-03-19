@@ -130,3 +130,7 @@ class Proxy(object):
         if source_str:
             self._source.append(source_str)
             self._source = list(set(self._source))
+
+    @source.setter
+    def source(self, value):
+        self._source = value

@@ -28,9 +28,9 @@ def testConfig():
     assert isinstance(conf.fetchers, list)
     print(conf.fetchers)
 
-    for _ in range(2):
-        print(conf.fetchers)
-        sleep(5)
+    # for _ in range(2):
+    #     print(conf.fetchers)
+    #     sleep(5)
 
 
 if __name__ == '__main__':
