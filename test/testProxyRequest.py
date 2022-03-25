@@ -18,7 +18,7 @@ def getHtml():
     while retry_count > 0:
         try:
             html = requests.get('https://www.example.com',
-                                proxies={"http": "http://{}".format(proxy)})
+                                proxies={"all": "http://{}".format(proxy)})
             # 使用代理访问
             return html
         except Exception:
@@ -30,8 +30,10 @@ def getHtml():
 
 if __name__ == '__main__':
     success_proxy_count = 0
-    for i in range(0, 10):
+    for i in range(0, 1):
         html = getHtml()
+        html.encoding = html.apparent_encoding
+        print(html.text)
         print("try times %d,status code: %d" % (i, 4003 if html is None else html.status_code))
         if html and html.status_code == 200:
             success_proxy_count += 1
