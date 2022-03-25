@@ -157,25 +157,17 @@ class ProxyFetcher(object):
 
     @staticmethod
     def freeProxy08():
-        headers = {
-            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.74 Safari/537.36',
-        }
         base_url = 'https://free-proxy-list.com/?search=1&port=&type[]=http&speed[]=2&speed[]=3&connect_time[]=2&connect_time[]=3&up_time=0&search=Search&page='
         page = 1
         while True:
             url = base_url + str(page)
-            try:
-                resp = WebRequest().get(url, headers=headers)
-                resp.raise_for_status()
-                proxies = re.findall(r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}:\d{1,5}', resp.text)
-                if proxies is not None and len(proxies) > 0:
-                    for proxy in proxies:
-                        yield proxy
-                else:
-                    break
-            except:
-                pass
-
+            resp = WebRequest().get(url)
+            proxies = re.findall(r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}:\d{1,5}', resp.text)
+            if proxies is not None and len(proxies) > 0:
+                for proxy in proxies:
+                    yield proxy
+            else:
+                break
             page += 1
 
     @staticmethod
@@ -246,7 +238,7 @@ class ProxyFetcher(object):
         ]
 
         for url in urls:
-            resp = WebRequest().get(url, timeout=10, proxies={
+            resp = WebRequest().get(url, proxies={
                 "http": "socks5://host.docker.internal:10808",
                 "https": "socks5://host.docker.internal:10808",
             })
@@ -260,7 +252,7 @@ class ProxyFetcher(object):
         page = 1
         while True:
             url = base_url + str(page)
-            r = WebRequest().get(url, timeout=10)
+            r = WebRequest().get(url)
             proxies = re.findall(r'<td>(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})</td>[\s\S]*?<td>(\d+)</td>', r.text)
             if len(proxies) == 0:
                 break
