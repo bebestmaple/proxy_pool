@@ -1,14 +1,34 @@
-version: '2'
+version: '3'
 services:
-  proxy_pool:
-    build: .
+  python3:
+    build: ./deploy/proxy_pool
     container_name: proxy_pool
+    restart: unless-stopped
+    volumes:
+      - .:/app
     ports:
-      - "5010:5010"
-    links:
-      - proxy_redis
+      - 8010:8010
+      - 5000:5000
+  redis:
+    image: redis:6.2.6
+    container_name: redis
+    restart: unless-stopped
+    command: redis-server /etc/redis/redis.conf
+    ports:
+      - "6379:6379"
+    volumes:
+      - /var/data/redis:/data
+      - /var/log/redis:/logs
+      - ./deploy/redis/conf/redis.conf:/etc/redis/redis.conf
+  phpredisadmin:
+    image: erikdubbelboer/phpredisadmin
+    container_name: phpredisadmin
+    restart: unless-stopped
     environment:
-      DB_CONN: "redis://@proxy_redis:6379/0"
-  proxy_redis:
-    image: "redis"
-    container_name: proxy_redis
+      - REDIS_1_HOST=host.docker.internal
+      - REDIS_1_NAME=docker_redis
+      - REDIS_1_PORT=6379
+      - REDIS_1_AUTH=123456
+      - REDIS_1_DATABASES=0
+    ports:
+      - 8011:80
