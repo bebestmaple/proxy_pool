@@ -26,7 +26,7 @@ services:
     container_name: phpredisadmin
     restart: unless-stopped
     environment:
-      - REDIS_1_HOST=host.docker.internal
+      - REDIS_1_HOST=107.150.102.81
       - REDIS_1_NAME=docker_redis
       - REDIS_1_PORT=6379
       - REDIS_1_AUTH=123456

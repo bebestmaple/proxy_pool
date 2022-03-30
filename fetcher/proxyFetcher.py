@@ -238,10 +238,7 @@ class ProxyFetcher(object):
         ]
 
         for url in urls:
-            resp = WebRequest().get(url, proxies={
-                "http": "socks5://host.docker.internal:10808",
-                "https": "socks5://host.docker.internal:10808",
-            })
+            resp = WebRequest().get(url)
             proxies = re.findall(r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}:\d{1,5}', resp.text)
             for proxy in proxies:
                 yield proxy
