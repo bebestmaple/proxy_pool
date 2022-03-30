@@ -1,6 +1,6 @@
 version: '3'
 services:
-  python3:
+  proxy_pool:
     build: ./deploy/proxy_pool
     container_name: proxy_pool
     restart: unless-stopped
@@ -10,6 +10,7 @@ services:
     ports:
       - 8010:8010
       - 5000:5000
+    command: /var/sh/start-container.sh
   redis:
     image: redis:6.2.6
     container_name: redis
@@ -26,7 +27,7 @@ services:
     container_name: phpredisadmin
     restart: unless-stopped
     environment:
-      - REDIS_1_HOST=107.150.102.81
+      - REDIS_1_HOST=redis
       - REDIS_1_NAME=docker_redis
       - REDIS_1_PORT=6379
       - REDIS_1_AUTH=123456
