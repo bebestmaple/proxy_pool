@@ -10,7 +10,7 @@ services:
     ports:
       - 8010:8010
       - 5000:5000
-    command: /var/sh/start-container.sh
+    command: /app/deploy/proxy_pool/sh/start-container.sh
   redis:
     image: redis:6.2.6
     container_name: redis
