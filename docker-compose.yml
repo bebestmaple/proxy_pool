@@ -15,7 +15,7 @@ services:
     image: redis:6.2.6
     container_name: redis
     restart: unless-stopped
-    command: chmod -R 777 /data && redis-server /etc/redis/redis.conf
+    command: chmod -R 777 /data && /usr/local/bin/redis-server /etc/redis/redis.conf
     ports:
       - "6379:6379"
     volumes:
