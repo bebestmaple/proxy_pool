@@ -7,6 +7,7 @@ services:
     volumes:
       - .:/app
       - /var/data/proxy_pool_cache:/app/cache
+      - /var/log/proxy_pool:/app/log
     ports:
       - 8010:8010
       - 5000:5000
