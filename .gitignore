@@ -2,4 +2,4 @@
 docs/_build
 *.pyc
 *.log
-./cache/*
+cache/**
